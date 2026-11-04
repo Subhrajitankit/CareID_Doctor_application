@@ -347,15 +347,25 @@ class _PatientDirectoryScreenState extends State<PatientDirectoryScreen> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const SizedBox(width: 16),
-          const Icon(Icons.search_rounded, size: 20, color: Color(0xFF6B7280)),
-          const SizedBox(width: 12),
+          // Left Search Icon (Node 10:1149 / 10:1150 - fill #494552)
+          const Padding(
+            padding: EdgeInsets.only(left: 16, right: 14),
+            child: Icon(
+              Icons.search_rounded,
+              size: 20,
+              color: Color(0xFF494552),
+            ),
+          ),
+
+          // Search TextField (Node 10:1147 / 10:1148)
           Expanded(
             child: TextField(
               controller: _searchController,
+              textAlignVertical: TextAlignVertical.center,
               style: const TextStyle(
                 fontFamily: 'Plus Jakarta Sans',
                 fontSize: 16,
+                fontWeight: FontWeight.w400,
                 color: Color(0xFF191C1D),
               ),
               decoration: const InputDecoration(
@@ -363,14 +373,23 @@ class _PatientDirectoryScreenState extends State<PatientDirectoryScreen> {
                 hintStyle: TextStyle(
                   fontFamily: 'Plus Jakarta Sans',
                   fontSize: 16,
+                  fontWeight: FontWeight.w400,
                   color: Color(0xFF6B7280),
                 ),
                 border: InputBorder.none,
+                enabledBorder: InputBorder.none,
+                focusedBorder: InputBorder.none,
+                errorBorder: InputBorder.none,
+                disabledBorder: InputBorder.none,
+                focusedErrorBorder: InputBorder.none,
+                filled: false,
                 isDense: true,
-                contentPadding: EdgeInsets.symmetric(vertical: 14),
+                contentPadding: EdgeInsets.zero,
               ),
             ),
           ),
+
+          // Right Mic / Clear Action (Node 10:1152 / 10:1153)
           if (_searchController.text.isNotEmpty)
             GestureDetector(
               onTap: () {
@@ -378,7 +397,7 @@ class _PatientDirectoryScreenState extends State<PatientDirectoryScreen> {
               },
               behavior: HitTestBehavior.opaque,
               child: const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 14),
+                padding: EdgeInsets.symmetric(horizontal: 16),
                 child: Icon(Icons.cancel, size: 20, color: Color(0xFF7A7583)),
               ),
             )
@@ -398,7 +417,7 @@ class _PatientDirectoryScreenState extends State<PatientDirectoryScreen> {
               },
               behavior: HitTestBehavior.opaque,
               child: const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 14),
+                padding: EdgeInsets.symmetric(horizontal: 16),
                 child: Icon(
                   Icons.mic_rounded,
                   size: 20,
