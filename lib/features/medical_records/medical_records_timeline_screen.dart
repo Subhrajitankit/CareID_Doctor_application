@@ -4,6 +4,7 @@ import '../../data/mock_data.dart';
 import '../../data/models/clinical_models.dart';
 import 'filter_records_bottom_sheet.dart';
 import 'share_record_modal.dart';
+import 'widgets/careid_filter_icon.dart';
 
 /// Medical Records Timeline Screen
 /// Exact Figma Source of Truth: Node 10:1887 ("Medical Records - Timeline & Vault")
@@ -349,7 +350,7 @@ class _MedicalRecordsTimelineScreenState
           // Search Input Box (Node 10:1926)
           Expanded(
             child: Container(
-              height: 54,
+              height: 56,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(9999),
@@ -372,7 +373,7 @@ class _MedicalRecordsTimelineScreenState
                   const Icon(
                     Icons.search_rounded,
                     size: 20,
-                    color: Color(0x99494552), // rgba(73,69,82,0.6)
+                    color: Color(0xFF494552),
                   ),
                   const SizedBox(width: 12),
                   // Text Field
@@ -382,7 +383,7 @@ class _MedicalRecordsTimelineScreenState
                       focusNode: _searchFocusNode,
                       style: const TextStyle(
                         fontFamily: 'Plus Jakarta Sans',
-                        fontSize: 15,
+                        fontSize: 16,
                         fontWeight: FontWeight.normal,
                         color: Color(0xFF191C1D),
                       ),
@@ -390,11 +391,17 @@ class _MedicalRecordsTimelineScreenState
                         hintText: 'Search records, labs, doctors...',
                         hintStyle: TextStyle(
                           fontFamily: 'Plus Jakarta Sans',
-                          fontSize: 15,
+                          fontSize: 16,
                           fontWeight: FontWeight.normal,
                           color: Color(0x99494552),
                         ),
                         border: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        errorBorder: InputBorder.none,
+                        disabledBorder: InputBorder.none,
+                        focusedErrorBorder: InputBorder.none,
+                        filled: false,
                         isDense: true,
                         contentPadding: EdgeInsets.zero,
                       ),
@@ -427,15 +434,10 @@ class _MedicalRecordsTimelineScreenState
             onTap: _openFilterSheet,
             behavior: HitTestBehavior.opaque,
             child: Container(
-              width: 44,
-              height: 44,
+              width: 32,
+              height: 32,
               alignment: Alignment.center,
-              decoration: const BoxDecoration(shape: BoxShape.circle),
-              child: const Icon(
-                Icons.tune_rounded,
-                size: 24,
-                color: Color(0xFF494552),
-              ),
+              child: const CareIdFilterIcon(size: 24, color: Color(0xFF1E1E1E)),
             ),
           ),
         ],

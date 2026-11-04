@@ -3,6 +3,7 @@ import '../../core/routes/app_routes.dart';
 import '../../data/mock_data.dart';
 import '../../data/models/clinical_models.dart';
 import 'filter_records_bottom_sheet.dart';
+import 'widgets/careid_filter_icon.dart';
 
 /// PET Records Screen
 /// Exact Figma Source of Truth: Node 10:7985 ("Pet Records - Timeline")
@@ -367,7 +368,8 @@ class _PetRecordsScreenState extends State<PetRecordsScreen> {
   // ==========================================
   Widget _buildSearchBar() {
     return Container(
-      height: 48,
+      width: double.infinity,
+      height: 56,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(9999),
@@ -379,37 +381,40 @@ class _PetRecordsScreenState extends State<PetRecordsScreen> {
           BoxShadow(
             color: Color(0x0D000000), // rgba(0,0,0,0.05)
             offset: Offset(0, 1),
-            blurRadius: 1,
+            blurRadius: 2,
           ),
         ],
       ),
       child: Row(
         children: [
-          const Padding(
-            padding: EdgeInsets.only(left: 16, right: 10),
-            child: Icon(
-              Icons.search_rounded,
-              size: 20,
-              color: Color(0xFF494552),
-            ),
-          ),
+          const SizedBox(width: 16),
+          const Icon(Icons.search_rounded, size: 20, color: Color(0xFF494552)),
+          const SizedBox(width: 12),
           Expanded(
             child: TextField(
               controller: _searchController,
               focusNode: _searchFocusNode,
               style: const TextStyle(
                 fontFamily: 'Plus Jakarta Sans',
-                fontSize: 15,
+                fontSize: 16,
+                fontWeight: FontWeight.normal,
                 color: Color(0xFF191C1D),
               ),
               decoration: const InputDecoration(
                 hintText: 'Search records, labs, doctors...',
                 hintStyle: TextStyle(
                   fontFamily: 'Plus Jakarta Sans',
-                  fontSize: 15,
+                  fontSize: 16,
+                  fontWeight: FontWeight.normal,
                   color: Color(0x99494552),
                 ),
                 border: InputBorder.none,
+                enabledBorder: InputBorder.none,
+                focusedBorder: InputBorder.none,
+                errorBorder: InputBorder.none,
+                disabledBorder: InputBorder.none,
+                focusedErrorBorder: InputBorder.none,
+                filled: false,
                 isDense: true,
                 contentPadding: EdgeInsets.zero,
               ),
@@ -421,23 +426,15 @@ class _PetRecordsScreenState extends State<PetRecordsScreen> {
               behavior: HitTestBehavior.opaque,
               child: const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8),
-                child: Icon(
-                  Icons.close_rounded,
-                  size: 18,
-                  color: Color(0xFF494552),
-                ),
+                child: Icon(Icons.cancel, size: 18, color: Color(0xFF7A7583)),
               ),
             ),
           GestureDetector(
             onTap: _openFilterSheet,
             behavior: HitTestBehavior.opaque,
             child: const Padding(
-              padding: EdgeInsets.only(left: 4, right: 16),
-              child: Icon(
-                Icons.tune_rounded,
-                size: 22,
-                color: Color(0xFF494552),
-              ),
+              padding: EdgeInsets.only(left: 4, right: 18),
+              child: CareIdFilterIcon(size: 24, color: Color(0xFF1E1E1E)),
             ),
           ),
         ],

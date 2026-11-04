@@ -3,6 +3,7 @@ import '../../core/routes/app_routes.dart';
 import '../../data/mock_data.dart';
 import '../../data/models/clinical_models.dart';
 import 'filter_records_bottom_sheet.dart';
+import 'widgets/careid_filter_icon.dart';
 
 /// Vision Records Screen
 /// Exact Figma Source of Truth: Node 10:7803 ("Vision Records - Timeline")
@@ -379,7 +380,7 @@ class _VisionRecordsScreenState extends State<VisionRecordsScreen> {
   // ==========================================
   Widget _buildSearchBar() {
     return Container(
-      height: 54,
+      height: 56,
       width: double.infinity,
       decoration: BoxDecoration(
         color: Colors.white,
@@ -410,19 +411,25 @@ class _VisionRecordsScreenState extends State<VisionRecordsScreen> {
               focusNode: _searchFocusNode,
               style: const TextStyle(
                 fontFamily: 'Plus Jakarta Sans',
-                fontSize: 15,
-                fontWeight: FontWeight.w400,
+                fontSize: 16,
+                fontWeight: FontWeight.normal,
                 color: Color(0xFF191C1D),
               ),
               decoration: const InputDecoration(
                 hintText: 'Search records, labs, doctors...',
                 hintStyle: TextStyle(
                   fontFamily: 'Plus Jakarta Sans',
-                  fontSize: 15,
-                  fontWeight: FontWeight.w400,
+                  fontSize: 16,
+                  fontWeight: FontWeight.normal,
                   color: Color(0x99494552), // rgba(73,69,82,0.6)
                 ),
                 border: InputBorder.none,
+                enabledBorder: InputBorder.none,
+                focusedBorder: InputBorder.none,
+                errorBorder: InputBorder.none,
+                disabledBorder: InputBorder.none,
+                focusedErrorBorder: InputBorder.none,
+                filled: false,
                 isDense: true,
                 contentPadding: EdgeInsets.zero,
               ),
@@ -446,13 +453,9 @@ class _VisionRecordsScreenState extends State<VisionRecordsScreen> {
           GestureDetector(
             onTap: _openFilterSheet,
             behavior: HitTestBehavior.opaque,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-              child: const Icon(
-                Icons.tune_rounded,
-                size: 20,
-                color: Color(0xFF494552),
-              ),
+            child: const Padding(
+              padding: EdgeInsets.only(left: 4, right: 18),
+              child: CareIdFilterIcon(size: 24, color: Color(0xFF1E1E1E)),
             ),
           ),
         ],

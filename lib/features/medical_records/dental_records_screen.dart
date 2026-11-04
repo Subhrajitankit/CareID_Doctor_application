@@ -3,6 +3,7 @@ import '../../core/routes/app_routes.dart';
 import '../../data/mock_data.dart';
 import '../../data/models/clinical_models.dart';
 import 'filter_records_bottom_sheet.dart';
+import 'widgets/careid_filter_icon.dart';
 
 /// Dental Records Screen
 /// Exact Figma Source of Truth: Node 10:7623 ("Dental Records - Timeline")
@@ -354,7 +355,7 @@ class _DentalRecordsScreenState extends State<DentalRecordsScreen> {
   Widget _buildSearchBar() {
     return Container(
       width: double.infinity,
-      height: 54,
+      height: 56,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(9999),
@@ -365,7 +366,7 @@ class _DentalRecordsScreenState extends State<DentalRecordsScreen> {
         boxShadow: const [
           BoxShadow(
             color: Color(0x0D000000), // rgba(0,0,0,0.05)
-            blurRadius: 1,
+            blurRadius: 2,
             offset: Offset(0, 1),
           ),
         ],
@@ -373,11 +374,7 @@ class _DentalRecordsScreenState extends State<DentalRecordsScreen> {
       child: Row(
         children: [
           const SizedBox(width: 16),
-          const Icon(
-            Icons.search,
-            size: 20,
-            color: Color(0x99494552), // rgba(73,69,82,0.6)
-          ),
+          const Icon(Icons.search, size: 20, color: Color(0xFF494552)),
           const SizedBox(width: 12),
           Expanded(
             child: TextField(
@@ -386,16 +383,24 @@ class _DentalRecordsScreenState extends State<DentalRecordsScreen> {
               style: const TextStyle(
                 fontFamily: 'Plus Jakarta Sans',
                 fontSize: 16,
+                fontWeight: FontWeight.normal,
                 color: Color(0xFF191C1D),
               ),
               decoration: const InputDecoration(
                 hintText: 'Search records, labs, doctors...',
                 hintStyle: TextStyle(
                   fontFamily: 'Plus Jakarta Sans',
-                  fontSize: 15,
+                  fontSize: 16,
+                  fontWeight: FontWeight.normal,
                   color: Color(0x99494552),
                 ),
                 border: InputBorder.none,
+                enabledBorder: InputBorder.none,
+                focusedBorder: InputBorder.none,
+                errorBorder: InputBorder.none,
+                disabledBorder: InputBorder.none,
+                focusedErrorBorder: InputBorder.none,
+                filled: false,
                 isDense: true,
                 contentPadding: EdgeInsets.zero,
               ),
@@ -407,11 +412,7 @@ class _DentalRecordsScreenState extends State<DentalRecordsScreen> {
               behavior: HitTestBehavior.opaque,
               child: const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8),
-                child: Icon(
-                  Icons.close_rounded,
-                  size: 18,
-                  color: Color(0xFF494552),
-                ),
+                child: Icon(Icons.cancel, size: 18, color: Color(0xFF7A7583)),
               ),
             ),
           GestureDetector(
@@ -419,11 +420,7 @@ class _DentalRecordsScreenState extends State<DentalRecordsScreen> {
             behavior: HitTestBehavior.opaque,
             child: const Padding(
               padding: EdgeInsets.only(left: 4, right: 18),
-              child: Icon(
-                Icons.tune_rounded,
-                size: 22,
-                color: Color(0xFF494552),
-              ),
+              child: CareIdFilterIcon(size: 24, color: Color(0xFF1E1E1E)),
             ),
           ),
         ],
