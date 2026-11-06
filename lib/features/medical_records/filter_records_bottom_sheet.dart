@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 /// Filter Records Bottom Sheet
 /// Exact Figma Source of Truth: Node 10:7354 ("Filter Records Bottom Sheet")
@@ -642,7 +643,7 @@ class _FilterRecordsBottomSheetState extends State<FilterRecordsBottomSheet> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Facility Search Input (Node 10:7415, 10:7416)
+        // Facility Search Input (Figma Node 10:7415, 10:7416)
         Container(
           height: 50,
           decoration: BoxDecoration(
@@ -653,34 +654,44 @@ class _FilterRecordsBottomSheetState extends State<FilterRecordsBottomSheet> {
               width: 1,
             ),
           ),
+          clipBehavior: Clip.antiAlias,
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              // Figma Node 10:7419 (x=16, y=17, w=16, h=16)
               const SizedBox(width: 16),
-              const Icon(
-                Icons.search_rounded,
-                size: 18,
-                color: Color(0xFF9CA3AF),
-              ),
-              const SizedBox(width: 12),
+              const _FacilitySearchIcon(),
+              // Figma Node 10:7416 pl-[48px]: 16px left + 16px icon + 16px gap = 48px
+              const SizedBox(width: 16),
               Expanded(
                 child: TextField(
                   controller: _facilitySearchController,
                   onChanged: (_) => setState(() {}),
-                  style: const TextStyle(
-                    fontFamily: 'Plus Jakarta Sans',
-                    fontSize: 15,
-                    color: Color(0xFF191C1D),
+                  cursorColor: const Color(0xFF494552),
+                  style: GoogleFonts.inter(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                    color: const Color(0xFF191C1D),
+                    height: 20 / 16,
                   ),
-                  decoration: const InputDecoration(
+                  textAlignVertical: TextAlignVertical.center,
+                  decoration: InputDecoration(
                     hintText: 'Search facilities...',
-                    hintStyle: TextStyle(
-                      fontFamily: 'Plus Jakarta Sans',
-                      fontSize: 15,
-                      color: Color(0xFF9CA3AF),
+                    hintStyle: GoogleFonts.inter(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                      color: const Color(0xFF9CA3AF),
+                      height: 20 / 16,
                     ),
-                    border: InputBorder.none,
                     isDense: true,
                     contentPadding: EdgeInsets.zero,
+                    filled: false,
+                    border: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    errorBorder: InputBorder.none,
+                    disabledBorder: InputBorder.none,
+                    focusedErrorBorder: InputBorder.none,
                   ),
                 ),
               ),
@@ -690,15 +701,18 @@ class _FilterRecordsBottomSheetState extends State<FilterRecordsBottomSheet> {
                     _facilitySearchController.clear();
                     setState(() {});
                   },
+                  behavior: HitTestBehavior.opaque,
                   child: const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 12),
+                    padding: EdgeInsets.symmetric(horizontal: 16),
                     child: Icon(
-                      Icons.cancel,
+                      Icons.cancel_rounded,
                       size: 16,
                       color: Color(0xFF9CA3AF),
                     ),
                   ),
-                ),
+                )
+              else
+                const SizedBox(width: 16),
             ],
           ),
         ),
@@ -770,4 +784,71 @@ class _FilterRecordsBottomSheetState extends State<FilterRecordsBottomSheet> {
       ],
     );
   }
+}
+
+/// Exact search icon vector extracted from Figma Node 10:7420 (CAREID-AIO-FIGMA)
+class _FacilitySearchIcon extends StatelessWidget {
+  const _FacilitySearchIcon();
+
+  @override
+  Widget build(BuildContext context) {
+    return const CustomPaint(
+      size: Size(16, 16),
+      painter: _FacilitySearchIconPainter(),
+    );
+  }
+}
+
+class _FacilitySearchIconPainter extends CustomPainter {
+  const _FacilitySearchIconPainter();
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = const Color(0xFF494552)
+      ..style = PaintingStyle.fill
+      ..isAntiAlias = true;
+
+    final scaleX = size.width / 16.0;
+    final scaleY = size.height / 16.0;
+
+    canvas.save();
+    canvas.scale(scaleX, scaleY);
+
+    final path = Path()..fillType = PathFillType.evenOdd;
+    // Outer boundary & handle from Figma SVG (viewBox 0 0 16 16)
+    path.moveTo(14.7556, 16.0);
+    path.lineTo(9.15556, 10.4);
+    path.cubicTo(8.71111, 10.7556, 8.2, 11.0371, 7.62222, 11.2444);
+    path.cubicTo(7.04444, 11.4518, 6.42963, 11.5556, 5.77778, 11.5556);
+    path.cubicTo(4.16296, 11.5556, 2.79629, 10.9963, 1.67778, 9.87778);
+    path.cubicTo(0.55926, 8.75926, 0.0, 7.3926, 0.0, 5.77778);
+    path.cubicTo(0.0, 4.16296, 0.55926, 2.79629, 1.67778, 1.67778);
+    path.cubicTo(2.79629, 0.55926, 4.16296, 0.0, 5.77778, 0.0);
+    path.cubicTo(7.3926, 0.0, 8.75926, 0.55926, 9.87778, 1.67778);
+    path.cubicTo(10.9963, 2.79629, 11.5556, 4.16296, 11.5556, 5.77778);
+    path.cubicTo(11.5556, 6.42963, 11.4518, 7.04444, 11.2444, 7.62222);
+    path.cubicTo(11.0371, 8.2, 10.7556, 8.71111, 10.4, 9.15556);
+    path.lineTo(16.0, 14.7556);
+    path.lineTo(14.7556, 16.0);
+    path.close();
+
+    // Inner cutout circle
+    path.moveTo(5.77778, 9.77778);
+    path.cubicTo(6.88889, 9.77778, 7.83333, 9.38889, 8.61111, 8.61111);
+    path.cubicTo(9.38889, 7.83333, 9.77778, 6.88889, 9.77778, 5.77778);
+    path.cubicTo(9.77778, 4.66667, 9.38889, 3.72222, 8.61111, 2.94444);
+    path.cubicTo(7.83333, 2.16667, 6.88889, 1.77778, 5.77778, 1.77778);
+    path.cubicTo(4.66667, 1.77778, 3.72222, 2.16667, 2.94444, 2.94444);
+    path.cubicTo(2.16667, 3.72222, 1.77778, 4.66667, 1.77778, 5.77778);
+    path.cubicTo(1.77778, 6.88889, 2.16667, 7.83333, 2.94444, 8.61111);
+    path.cubicTo(3.72222, 9.38889, 4.66667, 9.77778, 5.77778, 9.77778);
+    path.close();
+
+    canvas.drawPath(path, paint);
+    canvas.restore();
+  }
+
+  @override
+  bool shouldRepaint(covariant _FacilitySearchIconPainter oldDelegate) => false;
 }
